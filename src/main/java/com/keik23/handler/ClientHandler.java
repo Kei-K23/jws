@@ -23,6 +23,7 @@ public class ClientHandler implements Runnable {
             BufferedReader reader = new BufferedReader(new InputStreamReader(input));
             String line;
             StringBuilder requestBuilder = new StringBuilder();
+            String requestLine = reader.readLine();
 
             // Read http request
             while (!(line = reader.readLine()).isEmpty()) {
