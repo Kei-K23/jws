@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import com.keik23.handler.ClientHandler;
+
 public class HttpServer {
     private int port;
 
@@ -19,7 +21,7 @@ public class HttpServer {
             while (true) {
                 Socket clientSocket = serverSocket.accept();
                 // Handle client socket
-                new Thread().start();
+                new Thread(new ClientHandler(clientSocket)).start();
             }
         } catch (IOException e) {
             e.printStackTrace();
