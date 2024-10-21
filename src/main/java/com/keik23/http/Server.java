@@ -1,9 +1,10 @@
 package com.keik23.http;
 
 import java.io.IOException;
+import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.function.Consumer;
+import java.util.function.BiConsumer;
 
 import com.keik23.handler.ClientHandler;
 import com.keik23.router.Router;
@@ -16,8 +17,20 @@ public class Server {
         this.port = port;
     }
 
-    public void addRoute(String path, Consumer<Request> handler) {
-        router.addRoutes(path, handler);
+    public void get(String path, BiConsumer<Request, OutputStream> handler) {
+        router.addRoute("GET", path, handler);
+    }
+
+    public void post(String path, BiConsumer<Request, OutputStream> handler) {
+        router.addRoute("POST", path, handler);
+    }
+
+    public void put(String path, BiConsumer<Request, OutputStream> handler) {
+        router.addRoute("PUT", path, handler);
+    }
+
+    public void delete(String path, BiConsumer<Request, OutputStream> handler) {
+        router.addRoute("DELETE", path, handler);
     }
 
     public void start() {
@@ -28,7 +41,7 @@ public class Server {
             while (true) {
                 Socket clientSocket = serverSocket.accept();
                 // Handle client socket
-                new Thread(new ClientHandler(clientSocket)).start();
+                new Thread(new ClientHandler(clientSocket, router)).start();
             }
         } catch (IOException e) {
             e.printStackTrace();

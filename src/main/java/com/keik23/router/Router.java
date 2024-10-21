@@ -2,11 +2,9 @@ package com.keik23.router;
 
 import java.io.IOException;
 import java.io.OutputStream;
-import java.net.http.HttpRequest;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.BiConsumer;
-import java.util.function.Consumer;
 
 import com.keik23.http.Request;
 
