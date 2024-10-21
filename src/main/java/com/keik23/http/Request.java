@@ -1,11 +1,11 @@
-package com.keik23.handler;
+package com.keik23.http;
 
-public class HttpRequest {
+public class Request {
     private String method;
     private String path;
     private String httpVersion;
 
-    public HttpRequest(String requestLine) {
+    public Request(String requestLine) {
         String[] parts = requestLine.split(" ");
         method = parts[0];
         path = parts[1];

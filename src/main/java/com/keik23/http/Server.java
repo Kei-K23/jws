@@ -3,14 +3,21 @@ package com.keik23.http;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.function.Consumer;
 
 import com.keik23.handler.ClientHandler;
+import com.keik23.router.Router;
 
-public class HttpServer {
+public class Server {
     private int port;
+    private Router router = new Router();
 
-    public HttpServer(int port) {
+    public Server(int port) {
         this.port = port;
+    }
+
+    public void addRoute(String path, Consumer<Request> handler) {
+        router.addRoutes(path, handler);
     }
 
     public void start() {
